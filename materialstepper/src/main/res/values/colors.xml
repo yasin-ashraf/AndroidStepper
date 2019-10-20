@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="completed">#24d26c</color>
-    <color name="un_completed">#eef0f5</color>
+    <color name="completed">#ff0000</color>
+    <color name="un_completed">#c5e3fc</color>
 </resources>

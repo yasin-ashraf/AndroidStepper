@@ -69,26 +69,23 @@ class Stepper {
         dashLength = (width / (steps - 1)).toFloat()
         //draw line from start to end
         val firstLine = canvas?.save()
-        drawLine(canvas)
-        canvas?.restoreToCount(firstLine ?: -1)
-        drawCircles(canvas)
-        //draw completed Line
         drawCompletedLine(canvas,currentPosition)
-        //draw completed circle
+        canvas?.restoreToCount(firstLine ?: -1)
+        val emptyLine = canvas?.save()
+        drawLine(canvas,currentPosition)
+        canvas?.restoreToCount(emptyLine ?: -1)
+        drawCircles(canvas,currentPosition)
         drawCompletedCircles(canvas,currentPosition)
     }
 
     private fun drawCompletedCircles(canvas: Canvas?, currentPosition: Int) {
-        paint.color = colorCompleted
-        paint.style = Paint.Style.FILL_AND_STROKE
-        paint.strokeWidth = 8f
-        for (i in 0..currentPosition) {
+        for (i in 0 until currentPosition) {
             val drawBitmap = canvas?.save()
             canvas?.drawBitmap(
                 successBitmap,
                 bounds.left.toFloat() + i*dashLength - circleRadius,
                 (bounds.height().toFloat() / 2 ) - circleRadius ,
-                null
+                paint
             )
             canvas?.restoreToCount(drawBitmap ?: -1)
         }
@@ -98,33 +95,38 @@ class Stepper {
         paint.color = colorCompleted
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 4f
-        canvas?.drawLine(
-            bounds.left.toFloat(),
-            bounds.height().toFloat() / 2,
-            bounds.left.toFloat() + dashLength*currentPosition,
-            bounds.height().toFloat() / 2,
-            paint
-        )
+        for(i in 0 until currentPosition -1){
+            canvas?.drawLine(
+                bounds.left.toFloat() + circleRadius + dashLength * i,
+                bounds.height().toFloat() / 2,
+                bounds.left.toFloat() + (dashLength*(i+1)) - circleRadius,
+                bounds.height().toFloat() / 2,
+                paint)
+        }
     }
 
-    private fun drawLine(canvas: Canvas?) {
+    private fun drawLine(canvas: Canvas?, currentPosition: Int) {
         paint.color = colorUncompleted
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 4f
-        canvas?.drawLine(
-            bounds.left.toFloat(),
-            bounds.height().toFloat() / 2,
-            bounds.width().toFloat(),
-            bounds.height().toFloat() / 2,
-            paint
-        )
+        for(i in currentPosition-1 until steps-1){
+            canvas?.drawLine(
+                (currentPosition-1) + circleRadius + dashLength*i,
+                bounds.height().toFloat() / 2,
+                (currentPosition-1) + (dashLength*(i+1)) - circleRadius,
+                bounds.height().toFloat() / 2,
+                paint
+            )
+
+        }
     }
 
-    private fun drawCircles(canvas: Canvas?) {
+    private fun drawCircles(canvas: Canvas?, currentPosition: Int) {
         paint.color = colorUncompleted
-        paint.style = Paint.Style.FILL_AND_STROKE
-        paint.strokeWidth = 8f
-        for (i in 0 until steps) {
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = 5f
+        paint.alpha = 255
+        for (i in currentPosition until steps) {
             val drawCircle = canvas?.save()
             canvas?.drawCircle(
                 bounds.left.toFloat() + i*dashLength,
