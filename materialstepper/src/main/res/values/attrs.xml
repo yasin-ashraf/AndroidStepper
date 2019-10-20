@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="stepper_view">
+        <attr name="steps" format="integer"/>
+        <attr name="dash_size" format="dimension"/>
+        <attr name="circle_radius" format="dimension"/>
+        <attr name="success_drawable" format="reference"/>
+        <attr name="color_completed" format="color"/>
+        <attr name="color_un_completed" format="color"/>
+        <attr name="equal_spacing" format="boolean"/>
+        <attr name="current_step" format="integer"/>
+    </declare-styleable>
+</resources>
