@@ -66,7 +66,7 @@ class Stepper {
         currentPosition: Int,
         width: Int
     ) {
-        dashLength = (width / (steps - 1)).toFloat()
+        if(equalSpacing) dashLength = (width / (steps - 1)).toFloat()
         //draw line from start to end
         val firstLine = canvas?.save()
         drawCompletedLine(canvas,currentPosition)

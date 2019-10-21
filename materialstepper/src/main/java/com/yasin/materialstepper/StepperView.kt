@@ -34,9 +34,9 @@ class StepperView : View {
         )
         val dm = resources.displayMetrics
         val dp100 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, dm)
-        val dp5 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5f, dm)
+        val dp10 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10f, dm)
         val dashLength = a.getDimension(R.styleable.stepper_view_dash_size,dp100)
-        val circleRadius = a.getDimension(R.styleable.stepper_view_circle_radius,dp5)
+        val circleRadius = a.getDimension(R.styleable.stepper_view_circle_radius,dp10)
         val steps = a.getInt(R.styleable.stepper_view_steps,3)
         val successDrawable = a.getResourceId(R.styleable.stepper_view_success_drawable,R.drawable.ic_success_tick)
         val colorCompleted = a.getColor(R.styleable.stepper_view_color_completed,ContextCompat.getColor(context,R.color.completed))
@@ -51,7 +51,7 @@ class StepperView : View {
         stepper.setColorCompleted(colorCompleted)
         stepper.setColorUnCompleted(colorUnCompleted)
         stepper.setSuccessDrawable(
-            AppCompatResources.getDrawable(context, successDrawable)?.toBitmap()!!
+            AppCompatResources.getDrawable(context, successDrawable)?.toBitmap((circleRadius*2).toInt(),(circleRadius*2).toInt())!!
         )
         a.recycle()
     }
