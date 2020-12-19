@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <com.yasin.materialstepper.StepperView
+        android:id="@+id/stepper"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:paddingStart="30dp"
@@ -17,5 +18,32 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="Step 2"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stepper"
+        />
+
+    <TextView
+        android:id="@+id/tv_step_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="Checkout"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_step"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
